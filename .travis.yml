@@ -28,13 +28,11 @@ jobs:
           env: >-
             USE_UCS2_PYTHON=1
             UCS2_PYTHON_VARIANT="2.7"
-        - stage: Old Python
-        - python: "3.4"
         - stage: PyPy
           python: "pypy"
         - python: "pypy3"
-        - stage: Intermediate versions
-          python: "3.5"
+        - stage: Old Python
+          python: "3.4"
+        - python: "3.5"
         - python: "3.6"
-
 # vim: et
