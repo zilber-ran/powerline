@@ -7,16 +7,23 @@ from powerline.lib.unicode import out_u
 from powerline.theme import requires_segment_info
 from powerline.segments import Segment, with_docstring
 
-
 @requires_segment_info
-def environment(pl, segment_info, variable=None):
+def environment(pl, segment_info, variable=None, delim=None, pos=None):
 	'''Return the value of any defined environment variable
 
 	:param string variable:
 		The environment variable to return if found
+	:param string delim:
+	    An optional delim to parse path like variable info
+	:param string pos:
+	    An optional slicing position to parse path like variable info
 	'''
+	if variable and delim and pos:
+	    result = segment_info['environ'].get(variable, None)
+	    if result and delim in result and abs(pos) < len(result.split(delim)):
+	        return result.split(delim)[pos]
+			
 	return segment_info['environ'].get(variable, None)
-
 
 @requires_segment_info
 def virtualenv(pl, segment_info, ignore_venv=False, ignore_conda=False):
